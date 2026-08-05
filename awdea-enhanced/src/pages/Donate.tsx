@@ -99,25 +99,20 @@ const Donate = () => (
           </p>
 
           <a
-            href="https://awdea.org/donate"
+            href="https://buy.stripe.com/cN215g7UG1ip7UA144"
             className={primaryButton}
             rel="noopener"
           >
             Donate through Stripe
           </a>
 
-          <p className="mt-4 text-sm text-slate-500">
-            Note: this button currently points at the existing AWDEA donate page.
-            Swap in the live Stripe checkout link before launch.
-          </p>
-
           <div className="mt-14 rounded-3xl border border-slate-200 bg-[var(--color-mist)] p-8">
             <h3 className="mb-4 text-xl font-bold text-slate-900">
               Donating tickets
             </h3>
             <p className="mb-6 leading-relaxed text-slate-700">
-              We also accept ticket donations for accessible events. Contact James
-              with your contact information and we will get back to you.
+              Have tickets you can’t use? We’d love to pass them on. Get in touch
+              with James and he’ll take it from there.
             </p>
             <ul className="flex flex-col gap-2 text-lg font-semibold">
               <li>
