@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import BackToTop from './components/BackToTop';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
-import { useRouter } from './lib/router';
+import { Link, useRouter } from './lib/router';
 import Donate from './pages/Donate';
 import Donors from './pages/Donors';
 import Home from './pages/Home';
@@ -24,12 +24,12 @@ const NotFound = () => (
       <p className="mb-8 text-lg text-slate-600">
         That page doesn’t exist yet.
       </p>
-      <a
-        href="/"
+      <Link
+        to="/"
         className="inline-grid min-h-12 place-items-center rounded-full bg-[var(--color-brand)] px-8 font-semibold text-white"
       >
         Back to home
-      </a>
+      </Link>
     </div>
   </section>
 );

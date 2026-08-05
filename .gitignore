@@ -4,6 +4,9 @@ package-lock.json
 yarn.lock
 
 # Build outputs
+# NOTE: docs/ is intentionally NOT ignored — GitHub Pages serves the site
+# from that folder.
+dist/
 build/
 .env.local
 .env.*.local

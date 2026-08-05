@@ -7,6 +7,21 @@ import {
 } from 'react';
 import type { AnchorHTMLAttributes, ReactNode } from 'react';
 
+/** '/' in dev, '/AWDEA/' on GitHub Pages. Always has a trailing slash. */
+const BASE = import.meta.env.BASE_URL;
+
+/** Browser pathname -> app route ('/AWDEA/bios' -> '/bios'). */
+const toRoute = (pathname: string) => {
+  const trimmed = pathname.startsWith(BASE)
+    ? pathname.slice(BASE.length)
+    : pathname.replace(/^\//, '');
+  return `/${trimmed.replace(/\/$/, '')}`.replace(/^\/\//, '/');
+};
+
+/** App route -> browser href ('/bios' -> '/AWDEA/bios'). */
+export const toHref = (route: string) =>
+  `${BASE}${route.replace(/^\//, '')}`;
+
 interface RouterValue {
   path: string;
   navigate: (to: string) => void;
@@ -18,21 +33,19 @@ const RouterContext = createContext<RouterValue>({
 });
 
 export const RouterProvider = ({ children }: { children: ReactNode }) => {
-  const [path, setPath] = useState(() => window.location.pathname);
+  const [path, setPath] = useState(() => toRoute(window.location.pathname));
 
   useEffect(() => {
-    const onPop = () => setPath(window.location.pathname);
+    const onPop = () => setPath(toRoute(window.location.pathname));
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
 
   const navigate = useCallback((to: string) => {
-    if (to === window.location.pathname) {
-      window.scrollTo({ top: 0 });
-      return;
+    if (to !== toRoute(window.location.pathname)) {
+      window.history.pushState({}, '', toHref(to));
+      setPath(to);
     }
-    window.history.pushState({}, '', to);
-    setPath(to);
     window.scrollTo({ top: 0 });
   }, []);
 
@@ -56,7 +69,7 @@ export const Link = ({ to, children, onClick, ...rest }: LinkProps) => {
 
   return (
     <a
-      href={to}
+      href={toHref(to)}
       onClick={(event) => {
         onClick?.(event);
         if (
