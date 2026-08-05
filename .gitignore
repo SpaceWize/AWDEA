@@ -1,12 +1,10 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 
-# Build outputs
-# NOTE: docs/ is intentionally NOT ignored — GitHub Pages serves the site
-# from that folder.
+# Build outputs — CI builds and deploys these, so they are not committed.
 dist/
+docs/
 build/
 .env.local
 .env.*.local
