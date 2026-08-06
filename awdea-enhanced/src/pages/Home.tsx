@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import HowItWorks from '../components/HowItWorks';
-import ImagePlaceholder from '../components/ImagePlaceholder';
+import ScrollScrubVideo from '../components/ScrollScrubVideo';
 import ScrollReveal from '../components/ScrollReveal';
 import StaggerContainer, { staggerChild } from '../components/StaggerContainer';
 import { Link } from '../lib/router';
@@ -38,9 +38,11 @@ const Home = () => (
         </ScrollReveal>
 
         <ScrollReveal direction="right" delay={0.15}>
-          <ImagePlaceholder
-            label="Photo to come — AWDEA members at an event"
-            className="h-80 md:h-96"
+          <ScrollScrubVideo
+            src="media/about-conversation.mp4"
+            label="People seated together in an accessible seating area at a live event, talking and smiling"
+            aspect="aspect-video"
+            trimCorner={0.2}
           />
         </ScrollReveal>
       </div>
@@ -98,9 +100,15 @@ const Home = () => (
     <section className="bg-[var(--color-mist)] px-6 py-24 md:px-12">
       <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
         <ScrollReveal direction="left">
-          <ImagePlaceholder
-            label="Photo to come — an accessible venue AWDEA works with"
-            className="h-80 border-slate-400/70 bg-white md:h-96"
+          <ScrollScrubVideo
+            src="media/ramp-wheelchair.mp4"
+            label="A wheelchair user propelling themselves along a wooden boardwalk, gloved hand gripping the wheel rim"
+            aspect="aspect-square"
+            className="mx-auto w-full max-w-md"
+            // Last section on the page — the default range would leave the
+            // final third of the clip unreachable before the footer stops us.
+            offset={['start end', 'center center']}
+            trimCorner={0.12}
           />
         </ScrollReveal>
         <ScrollReveal direction="right" delay={0.15}>
