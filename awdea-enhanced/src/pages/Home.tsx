@@ -6,6 +6,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import StaggerContainer, { staggerChild } from '../components/StaggerContainer';
 import { Link } from '../lib/router';
 import { outlineButton, primaryButton, sectionTitle } from '../lib/styles';
+import EventsCalendar from '../components/EventsCalendar';
 
 const offers = [
   { title: 'Concerts', body: 'Live music from local venues to arena headliners.' },
