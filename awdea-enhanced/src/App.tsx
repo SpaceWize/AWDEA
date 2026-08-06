@@ -1,4 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import type { ReactNode } from 'react';
 import BackToTop from './components/BackToTop';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
@@ -8,11 +10,23 @@ import Donors from './pages/Donors';
 import Home from './pages/Home';
 import OurTeam from './pages/OurTeam';
 
-const routes: Record<string, { title: string; element: React.ReactNode }> = {
-  '/': { title: 'AWDEA — Accessible Entertainment for All', element: <Home /> },
-  '/bios': { title: 'Our Team — AWDEA', element: <OurTeam /> },
-  '/donate': { title: 'How to Donate — AWDEA', element: <Donate /> },
-  '/donors': { title: 'Our Donors — AWDEA', element: <Donors /> },
+const routes: Record<string, { title: string; label: string; element: ReactNode }> = {
+  '/': {
+    title: 'AWDEA — Accessible Entertainment for All',
+    label: 'Home',
+    element: <Home />,
+  },
+  '/bios': { title: 'Our Team — AWDEA', label: 'Our team', element: <OurTeam /> },
+  '/donate': {
+    title: 'How to Donate — AWDEA',
+    label: 'How to donate',
+    element: <Donate />,
+  },
+  '/donors': {
+    title: 'Our Donors — AWDEA',
+    label: 'Our donors',
+    element: <Donors />,
+  },
 };
 
 const NotFound = () => (
@@ -21,9 +35,7 @@ const NotFound = () => (
       <h1 className="mb-4 text-5xl font-extrabold tracking-tight text-slate-900">
         Page not found
       </h1>
-      <p className="mb-8 text-lg text-slate-600">
-        That page doesn’t exist yet.
-      </p>
+      <p className="mb-8 text-lg text-slate-600">That page doesn’t exist yet.</p>
       <Link
         to="/"
         className="inline-grid min-h-12 place-items-center rounded-full bg-[var(--color-brand)] px-8 font-semibold text-white"
@@ -38,7 +50,26 @@ const App = () => {
   const { path } = useRouter();
   const route = routes[path];
 
-  document.title = route?.title ?? 'AWDEA';
+  const mainRef = useRef<HTMLElement>(null);
+  const isFirstRender = useRef(true);
+  // Announced politely on navigation. Without this a screen reader user gets
+  // no signal that the page changed, since a client-side route swap is silent.
+  const [announcement, setAnnouncement] = useState('');
+
+  useEffect(() => {
+    document.title = route?.title ?? 'Page not found — AWDEA';
+
+    // Don't steal focus or announce on the initial load.
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    setAnnouncement(`${route?.label ?? 'Page not found'} page loaded`);
+    // Move focus to the top of the new page so keyboard users continue from
+    // there rather than from wherever the old page's link used to be.
+    mainRef.current?.focus();
+  }, [path, route]);
 
   return (
     <>
@@ -48,7 +79,7 @@ const App = () => {
 
       <Navigation />
 
-      <main id="main">
+      <main id="main" ref={mainRef} tabIndex={-1} className="outline-none">
         {/* Slow cross-fade between pages. mode="wait" lets the old page finish
             leaving before the new one arrives. */}
         <AnimatePresence mode="wait">
@@ -63,6 +94,10 @@ const App = () => {
           </motion.div>
         </AnimatePresence>
       </main>
+
+      <p aria-live="polite" className="sr-only">
+        {announcement}
+      </p>
 
       <Footer />
       <BackToTop />

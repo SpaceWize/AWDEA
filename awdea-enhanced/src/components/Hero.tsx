@@ -31,7 +31,9 @@ const Hero = () => {
           Adults With Disabilities Entertainment Association
         </motion.p>
 
-        <h1 className="mb-8 text-5xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-7xl">
+        {/* Fluid size: "Entertainment" is one long unbreakable word, so a fixed
+            48px overflows a 320px viewport (WCAG 1.4.10 reflow). */}
+        <h1 className="mb-8 text-[clamp(2rem,8vw,5rem)] font-extrabold leading-[1.05] tracking-tight text-slate-900">
           {words.map((word, i) => (
             <motion.span
               key={word}
@@ -89,7 +91,7 @@ const Hero = () => {
           transition={{ delay: 1.4, duration: 0.8 }}
           className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
         >
-          <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+          <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-600">
             Scroll to explore
           </span>
           <span className="grid h-10 w-6 place-items-start rounded-full border-2 border-slate-400 pt-2">

@@ -11,9 +11,15 @@
 
 /* Scroll animation is driven by src/lib/smoothScroll.ts so the duration is
    controllable; CSS smooth scrolling would fight it. */
+html {
+  /* Belt-and-braces against horizontal scroll: entrance animations translate
+     elements off-axis before settling. */
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--color-paper);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
@@ -24,6 +30,12 @@ button {
   border: 0;
   font: inherit;
   cursor: pointer;
+}
+
+/* Long words (names, email addresses, URLs) must not force horizontal scroll
+   at narrow widths or high zoom. */
+h1, h2, h3, p, li, dd, td, th {
+  overflow-wrap: break-word;
 }
 
 :focus-visible {

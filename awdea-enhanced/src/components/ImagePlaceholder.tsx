@@ -40,7 +40,7 @@ const ImagePlaceholder = ({ label, className = '' }: ImagePlaceholderProps) => (
         strokeLinejoin="round"
       />
     </svg>
-    <span className="max-w-[26ch] text-sm font-medium text-slate-500">
+    <span className="max-w-[26ch] text-sm font-medium text-slate-600">
       {label}
     </span>
   </div>

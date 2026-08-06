@@ -53,11 +53,16 @@ const HowItWorks = () => (
           >
             <span
               aria-hidden="true"
-              className="mb-5 block text-3xl font-extrabold tracking-tight text-[var(--color-brand)]/25"
+              className="mb-5 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-brand)] text-xl font-extrabold tracking-tight text-white"
             >
               {step.num}
             </span>
-            <h3 className="mb-3 text-xl font-bold text-slate-900">{step.title}</h3>
+            <h3 className="mb-3 text-xl font-bold text-slate-900">
+              {/* The numeral above is decorative; screen readers get the step
+                  order from here instead. */}
+              <span className="sr-only">{`Step ${idx + 1} of ${steps.length}: `}</span>
+              {step.title}
+            </h3>
             <p className="text-base leading-relaxed text-slate-700">
               {step.description}
             </p>
