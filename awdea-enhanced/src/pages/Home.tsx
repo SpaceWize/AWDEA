@@ -112,7 +112,8 @@ const Home = () => (
           />
         </ScrollReveal>
         <ScrollReveal direction="right" delay={0.15}>
-          <h2 className={`mb-6 ${sectionTitle}`}>Accessible venues</h2>
+          {/* TEMP: red text is a deploy canary while GitHub Actions is degraded — revert once confirmed live */}
+          <h2 className={`mb-6 ${sectionTitle} text-red-600`}>Accessible venues</h2>
           <p className="text-lg leading-relaxed text-slate-700">
             Exploring accessible venues and locations for disabled adults opens up
             a world of inclusive opportunity.
