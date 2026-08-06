@@ -83,6 +83,8 @@ const Home = () => (
 
     <HowItWorks />
 
+    <EventsCalendar />
+
     <section className="px-6 py-24 md:px-12">
       <div className="mx-auto max-w-3xl text-center">
         <ScrollReveal>
