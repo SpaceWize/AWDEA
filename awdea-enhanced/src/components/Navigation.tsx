@@ -31,9 +31,13 @@ const Navigation = () => {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex min-h-11 items-center gap-3">
+          {/* Served from our own build rather than hotlinked from awdea.org,
+              so the masthead can't break if that host moves the file. */}
           <img
-            src="https://awdea.org/awdea_main_nobg.png"
+            src={`${import.meta.env.BASE_URL}awdea-logo.png`}
             alt="AWDEA home"
+            width={942}
+            height={265}
             className="h-10 w-auto"
           />
           <span className="hidden text-xs font-medium uppercase tracking-[0.18em] text-slate-500 sm:block">

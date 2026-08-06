@@ -22,13 +22,6 @@ interface ScrollScrubVideoProps {
    * bottom of the page, which runs out of scroll before it can exit.
    */
   endAt?: 'exit' | 'center';
-  /**
-   * Fraction to trim off the right and bottom edges, by scaling the frame up
-   * from its top-left corner. The generated clips carry a watermark down in
-   * the bottom-right; this pushes it outside the container. Set to 0 once the
-   * clips are replaced with clean exports.
-   */
-  trimCorner?: number;
 }
 
 /** How hard the clip chases the scroll position each frame. Lower is smoother
@@ -77,7 +70,6 @@ const ScrollScrubVideo = ({
   aspect = 'aspect-video',
   className = '',
   endAt = 'exit',
-  trimCorner = 0,
 }: ScrollScrubVideoProps) => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -252,14 +244,6 @@ const ScrollScrubVideo = ({
         preload="auto"
         disablePictureInPicture
         aria-hidden="true"
-        style={
-          trimCorner
-            ? {
-                transform: `scale(${(1 / (1 - trimCorner)).toFixed(4)})`,
-                transformOrigin: 'top left',
-              }
-            : undefined
-        }
         className="h-full w-full object-cover"
       />
     </div>

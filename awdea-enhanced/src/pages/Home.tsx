@@ -43,7 +43,6 @@ const Home = () => (
             poster="media/about-conversation-poster.jpg"
             label="People seated together in an accessible seating area at a live event, talking and smiling"
             aspect="aspect-video"
-            trimCorner={0.2}
           />
         </ScrollReveal>
       </div>
@@ -110,7 +109,6 @@ const Home = () => (
             // Last section on the page — the default range would leave the
             // final third of the clip unreachable before the footer stops us.
             endAt="center"
-            trimCorner={0.12}
           />
         </ScrollReveal>
         <ScrollReveal direction="right" delay={0.15}>
