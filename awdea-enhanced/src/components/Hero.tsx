@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion';
+import { Fragment } from 'react';
 import { Link } from '../lib/router';
 import { smoothScrollToId } from '../lib/smoothScroll';
 import { outlineButton, primaryButton } from '../lib/styles';
@@ -35,19 +36,23 @@ const Hero = () => {
             48px overflows a 320px viewport (WCAG 1.4.10 reflow). */}
         <h1 className="mb-8 text-[clamp(2rem,8vw,5rem)] font-extrabold leading-[1.05] tracking-tight text-slate-900">
           {words.map((word, i) => (
-            <motion.span
-              key={word}
-              initial={{ opacity: 0, y: 48 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.9,
-                delay: 0.2 + i * 0.12,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="mr-4 inline-block"
-            >
-              {word}
-            </motion.span>
+            // The space after each word is real text, not CSS margin —
+            // otherwise the accessible name collapses to one run-on word.
+            <Fragment key={word}>
+              <motion.span
+                initial={{ opacity: 0, y: 48 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.9,
+                  delay: 0.2 + i * 0.12,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="inline-block"
+              >
+                {word}
+              </motion.span>
+              {i < words.length - 1 ? ' ' : ''}
+            </Fragment>
           ))}
         </h1>
 
