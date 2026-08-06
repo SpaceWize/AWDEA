@@ -80,6 +80,22 @@ const ScrollScrubVideo = ({
     return () => io.disconnect();
   }, []);
 
+  // Metadata readiness is polled off readyState rather than taken purely from
+  // the React onLoadedMetadata prop. On a warm cache the clip can be decoded
+  // before React attaches its handler, so the event fires into the void and
+  // the scrub below never subscribes — the clip sits frozen on frame zero.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || ready) return;
+    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
+      setReady(true);
+      return;
+    }
+    const onMeta = () => setReady(true);
+    video.addEventListener('loadedmetadata', onMeta);
+    return () => video.removeEventListener('loadedmetadata', onMeta);
+  }, [near, ready]);
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video || !ready) return;
@@ -92,7 +108,9 @@ const ScrollScrubVideo = ({
     // Seeks are coalesced into one per frame: scroll fires far more often than
     // the decoder can serve, and queueing every event makes it fall behind.
     let frame = 0;
-    let progress = scrollYProgress.get();
+
+    const clamp = (value: number) => Math.min(Math.max(value, 0), 1);
+    let progress = clamp(scrollYProgress.get());
 
     const seek = () => {
       frame = 0;
@@ -105,7 +123,7 @@ const ScrollScrubVideo = ({
     };
 
     const unsubscribe = scrollYProgress.on('change', (value) => {
-      progress = Math.min(Math.max(value, 0), 1);
+      progress = clamp(value);
       schedule();
     });
 
@@ -127,7 +145,6 @@ const ScrollScrubVideo = ({
         <video
           ref={videoRef}
           src={`${import.meta.env.BASE_URL}${src}`}
-          onLoadedMetadata={() => setReady(true)}
           muted
           playsInline
           preload="auto"
