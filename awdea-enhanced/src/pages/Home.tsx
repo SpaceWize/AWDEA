@@ -40,6 +40,7 @@ const Home = () => (
         <ScrollReveal direction="right" delay={0.15}>
           <ScrollScrubVideo
             src="media/about-conversation.mp4"
+            poster="media/about-conversation-poster.jpg"
             label="People seated together in an accessible seating area at a live event, talking and smiling"
             aspect="aspect-video"
             trimCorner={0.2}
@@ -102,12 +103,13 @@ const Home = () => (
         <ScrollReveal direction="left">
           <ScrollScrubVideo
             src="media/ramp-wheelchair.mp4"
+            poster="media/ramp-wheelchair-poster.jpg"
             label="A wheelchair user propelling themselves along a wooden boardwalk, gloved hand gripping the wheel rim"
             aspect="aspect-square"
             className="mx-auto w-full max-w-md"
             // Last section on the page — the default range would leave the
             // final third of the clip unreachable before the footer stops us.
-            offset={['start end', 'center center']}
+            endAt="center"
             trimCorner={0.12}
           />
         </ScrollReveal>
