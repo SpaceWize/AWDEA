@@ -38,6 +38,12 @@ jobs:
 
       - name: Build
         run: npm run build
+        # The calendar reads these at build time. They are repository secrets
+        # so the values are never committed; without them the site still
+        # builds and falls back to its sample events instead of failing.
+        env:
+          VITE_GCAL_ID: ${{ secrets.VITE_GCAL_ID }}
+          VITE_GCAL_KEY: ${{ secrets.VITE_GCAL_KEY }}
 
       - uses: actions/configure-pages@v5
 
