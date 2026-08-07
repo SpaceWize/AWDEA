@@ -20,3 +20,6 @@ build/
 
 # Claude Code
 .claude/
+
+# Alternate design, kept local-only until it's ready for its own repo.
+newsite/
