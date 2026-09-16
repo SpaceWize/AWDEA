@@ -28,7 +28,7 @@ const steps = [
 ];
 
 const HowItWorks = () => (
-  <section id="how-it-works" className="bg-[var(--color-mist)] px-6 py-24 md:px-12">
+  <section id="how-it-works" className="bg-[var(--color-mist)] px-6 py-14 md:px-12 md:py-24">
     <div className="mx-auto max-w-6xl">
       <ScrollReveal className="mb-16 text-center">
         <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[var(--color-brand)]">
@@ -67,7 +67,7 @@ const HowItWorks = () => (
               {step.description}
             </p>
             {step.note && (
-              <p className="mt-4 text-sm text-slate-500">{step.note}</p>
+              <p className="mt-4 text-base text-slate-600 md:text-sm">{step.note}</p>
             )}
 
             {idx < steps.length - 1 && (

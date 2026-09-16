@@ -24,8 +24,8 @@ const Home = () => (
   <>
     <Hero />
 
-    <section id="about" className="px-6 py-24 md:px-12">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+    <section id="about" className="px-6 py-14 md:px-12 md:py-24">
+      <div className="mx-auto grid max-w-6xl items-center gap-8 md:gap-14 md:grid-cols-2">
         <ScrollReveal direction="left">
           <ScrollScrubVideo
             src="media/about-conversation.mp4"
@@ -49,7 +49,7 @@ const Home = () => (
       </div>
     </section>
 
-    <section className="bg-slate-900 px-6 py-24 text-white md:px-12">
+    <section className="bg-slate-900 px-6 py-14 text-white md:px-12 md:py-24">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal className="mb-14 max-w-2xl">
           <h2 className="mb-6 text-4xl font-extrabold tracking-tight md:text-5xl">
@@ -85,7 +85,7 @@ const Home = () => (
 
     <EventsCalendar />
 
-    <section className="px-6 py-24 md:px-12">
+    <section className="px-6 py-14 md:px-12 md:py-24">
       <div className="mx-auto max-w-3xl text-center">
         <ScrollReveal>
           <h2 className={`mb-6 ${sectionTitle}`}>Get involved</h2>
@@ -100,8 +100,8 @@ const Home = () => (
       </div>
     </section>
 
-    <section className="bg-[var(--color-mist)] px-6 py-24 md:px-12">
-      <div className="mx-auto grid max-w-6xl items-center gap-14 md:grid-cols-2">
+    <section className="bg-[var(--color-mist)] px-6 py-14 md:px-12 md:py-24">
+      <div className="mx-auto grid max-w-6xl items-center gap-8 md:gap-14 md:grid-cols-2">
         <ScrollReveal direction="left">
           <ScrollScrubVideo
             src="media/ramp-wheelchair.mp4"

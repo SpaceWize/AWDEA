@@ -12,7 +12,7 @@ const Hero = () => {
   return (
     <section
       id="top"
-      className="relative flex min-h-screen items-center overflow-hidden bg-[var(--color-mist)] px-6 pt-28 pb-20 md:px-12"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-[var(--color-mist)] px-6 pt-24 pb-14 md:pt-28 md:pb-20 md:px-12"
     >
       <motion.div
         aria-hidden="true"
@@ -70,9 +70,12 @@ const Hero = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.75 }}
-          className="flex flex-wrap gap-4"
+          // Full-width stacked buttons on a phone: two pills of different
+          // widths left-aligned read as ragged, and a thumb-width target is
+          // easier to hit than a 190px one.
+          className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4"
         >
-          <Link to="/donate" className={primaryButton}>
+          <Link to="/donate" className={`${primaryButton} w-full sm:w-auto`}>
             Support our mission
           </Link>
           <a
@@ -81,7 +84,7 @@ const Hero = () => {
               event.preventDefault();
               smoothScrollToId('how-it-works');
             }}
-            className={outlineButton}
+            className={`${outlineButton} w-full sm:w-auto`}
           >
             See how it works
           </a>
